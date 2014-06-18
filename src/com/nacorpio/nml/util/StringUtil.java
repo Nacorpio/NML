@@ -1,5 +1,6 @@
 package com.nacorpio.nml.util;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ public final class StringUtil {
 	public static final String getRegex(Object par1) {
 		
 		if (par1 instanceof Map<?, ?>) {
-			return "\\{([key=>.*?value=>.*?],?)*\\}";
+			return "\\{([key=>.*?&val=>.*?],?)*\\}";
 		} else if (par1 instanceof String[]) {
 			return "\\{(.*?\\,?)*\\}";
 		} else if (par1 instanceof Integer[]) {
@@ -18,6 +19,30 @@ public final class StringUtil {
 		}
 		
 		return ".*?";
+		
+	}
+	
+	public static final Map<?, ?> getMap(String par1) {
+		
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		
+		//{[key=>mykey&val=>myval], [key=>mykey1&val=>myval1]}
+		
+		String var1 = par1.split("\\{")[1].split("\\}")[0];
+		String[] var2 = var1.split("\\,.?");
+		
+		for (String var: var2) {
+			
+			String[] parts = var.split("&");
+			
+			String key = parts[0].split("=>")[1].replace("@c", ",");
+			String val = parts[1].split("=>")[1].replace("@c", ",");
+			
+			map.put(key, val);
+			
+		}
+		
+		return map;
 		
 	}
 	

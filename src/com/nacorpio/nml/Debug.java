@@ -11,7 +11,9 @@ public final class Debug {
 		Map<String, String> var1 = new HashMap<String, String>();
 		var1.put("Hello", "There");
 		var1.put("Gay", "Boii");
-		System.out.println(StringUtil.getString(var1));
+		String var2 = StringUtil.getString(var1);
+		Map<?, ?> map = StringUtil.getMap(var2);
+		System.out.println(StringUtil.getString(map));
 	}
 
 }
