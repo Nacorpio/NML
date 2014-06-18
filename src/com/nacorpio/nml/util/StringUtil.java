@@ -1,5 +1,6 @@
 package com.nacorpio.nml.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,21 @@ public final class StringUtil {
 		
 	}
 	
+	public static final List<?> getList(String par1) {
+		
+		List<Object> list = new ArrayList<Object>();
+		
+		String var1 = par1.split("\\{")[1].split("\\}")[0];
+		String[] var2 = var1.split("\\,");
+		
+		for (String var: var2) {
+			list.add(var);
+		}
+		
+		return list;
+		
+	}
+	
 	public static final Map<?, ?> getMap(String par1) {
 		
 		Map<Object, Object> map = new HashMap<Object, Object>();
@@ -29,7 +45,7 @@ public final class StringUtil {
 		//{[key=>mykey&val=>myval], [key=>mykey1&val=>myval1]}
 		
 		String var1 = par1.split("\\{")[1].split("\\}")[0];
-		String[] var2 = var1.split("\\,.?");
+		String[] var2 = var1.split("\\,");
 		
 		for (String var: var2) {
 			
